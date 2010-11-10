@@ -17,13 +17,15 @@ var pub = __dirname + '/public';
 
 // preManipulate handler for compiling .sass files to .css
 sass_compile = function (file, path, index, isLast, callback) {
-	fs.readFile(path, 'utf8', function(err, str){
-		if (err) {
-			next(err);
-		} else {
-			callback(sass.render(str))
-		}
-	});
+	if (path.match(/.sass$/)) {
+		fs.readFile(path, 'utf8', function(err, str){
+			if (err) {
+				next(err);
+			} else {
+				callback(sass.render(str))
+			}
+		});
+	}
 };
 
 // assetManager serves our css and js files
@@ -38,7 +40,7 @@ var assets = assetManager({
 		],
 		'preManipulate': {
 			'^': []
-		},
+		}, 
 		'postManipulate': {
 			'^': [
 				assetHandler.uglifyJsOptimize
