@@ -33,8 +33,8 @@ var assets = assetManager({
 		'path': './public/js/',
 		'dataType': 'js',
 		'files': [
-			'jquery-1.4.3.min.js'
-			, 'script.js'
+			'plugins.js',
+			'script.js',
 		],
 		'preManipulate': {
 			'^': []
@@ -50,7 +50,9 @@ var assets = assetManager({
 		'path': './public/css/',
 		'dataType': 'css',
 		'files': [
-			'styles.sass'
+			'boilerplate.css',
+			'styles.sass',
+			'boilerplate_media.css',
 		],
 		'preManipulate': {
 			'^': [
