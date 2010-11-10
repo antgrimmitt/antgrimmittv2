@@ -13,8 +13,8 @@ cp ./lib/html5-boilerplate/404.html ./views/404.jade
 cp ./lib/html5-boilerplate/apple-touch-icon.png ./public/apple-touch-icon.png
 cp ./lib/html5-boilerplate/favicon.ico ./public/favicon.ico
 cp ./lib/html5-boilerplate/robots.txt ./public/robots.txt
-cp ./lib/html5-boilerplate/js ./public/js
-cp ./lib/html5-boilerplate/css ./static/css
+cp -r ./lib/html5-boilerplate/js ./public
+cp -r ./lib/html5-boilerplate/css ./public
 
 echo "Splitting up html5-boilerplate css"
 
