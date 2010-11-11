@@ -55,7 +55,7 @@ var assets = assetManager({
 		'dataType': 'css',
 		'files': [
 			'boilerplate.css',
-			'styles.sass',
+			'style.sass',
 			'boilerplate_media.css'
 		],
 		'preManipulate': {
@@ -100,7 +100,7 @@ app.set('views', __dirname + '/views');
 // Set our default template engine to "jade"
 app.set('view engine', 'jade');
 
-app.dynamicHelpers({ 
+app.dynamicHelpers({
 	cacheTimeStamps: function (req, res) {
 		return assets.cacheTimestamps;
 	}
