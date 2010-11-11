@@ -7,6 +7,12 @@ var assetManager = require('connect-assetmanager');
 var assetHandler = require('connect-assetmanager-handlers');
 var sass = require('sass');
 
+function NotFound(msg) {
+    this.name = 'NotFound';
+    Error.call(this, msg);
+    Error.captureStackTrace(this, arguments.callee);
+}
+
 process.title = 'node-express-boilerplate';
 process.addListener('uncaughtException', function (err, stack) {
 	console.log('Caught exception: ' + err);
@@ -106,8 +112,27 @@ app.dynamicHelpers({
 	}
 });
 
+//setup the errors
+app.error(function (err, req, res, next) {
+    if (err instanceof NotFound) {
+        res.render('404');
+    } else {
+        res.render('500');
+    }
+});
+
 app.get('/', function (req, res) {
     res.render('index');
+});
+
+//A Route for Creating a 500 Error (Useful to keep around)
+app.get('/500', function (req, res) {
+    throw new Error('This is a 500 Error');
+});
+
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('/*', function (req, res) {
+    throw new NotFound();
 });
 
 app.get('/reload/', function (req, res) {
