@@ -1,5 +1,6 @@
 
-Node Express Boilerplate ========================
+Node HTML5 Express Boilerplate
+==============================
 
 this is my take on a node-boilerplate heavily influenced by Mathias Pettersson's
 node-express-boilerplate. For more information see
@@ -12,12 +13,16 @@ The main differences to Mathias' boilerplate are as follows:
   - I use sass.js as CSS extension
   - I cleaned up the code to comply with JSLint coding guidelines
   - I use connect-assetmanager to merge and minify all .js and .css ressources
+  - I use the html5-boilerplate as a submodule. Many of its ressources (such as
+    favicon or .js files) will be used. It's index.html will be transformed into
+    layout.jade by me soon.
   - The main html5-boilerplate stylesheet gets sliced into two pieces, so that
     you can write your own styles using sass in a seperate file. The
     assetmanager then compiles the sass file to css and merges it back into the
     original html5-boilerplate stylesheets.
 
-Installation ============
+Installation
+============
 
 Install the prerequisites::
 
