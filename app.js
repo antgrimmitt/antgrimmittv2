@@ -138,17 +138,17 @@ app.get('/*', function (req, res) {
 });
 
 app.get('/reload/', function (req, res) {
-	var reloadCss = lastChangedCss;
-	(function reload() {
-		setTimeout(function () {
-			if (reloadCss < lastChangedCss) {
-				res.send('reload');
-				reloadCss = lastChangedCss;
-			} else {
-				reload();
-			}
-		}, 100);
-	}());
+    var reloadCss = lastChangedCss;
+    (function reload() {
+        setTimeout(function () {
+            if (reloadCss < lastChangedCss) {
+                res.send('reload');
+                reloadCss = lastChangedCss;
+            } else {
+                reload();
+            }
+        }, 100);
+    }());
 });
 
 app.listen(3000);
