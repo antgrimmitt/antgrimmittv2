@@ -32,6 +32,8 @@ var sass_compile = function (file, path, index, isLast, callback) {
 				callback(sass.render(str));
 			}
 		});
+	} else {
+		callback(file);
 	}
 };
 
@@ -67,14 +69,14 @@ var assets = assetManager({
 		'preManipulate': {
 			'^': [
 				sass_compile,
-				assetHandler.yuiCssOptimize,
 				assetHandler.fixVendorPrefixes,
-				assetHandler.fixGradients,
-				assetHandler.replaceImageRefToBase64(__dirname + '/public')
+				assetHandler.fixGradients
 			]
 		},
 		'postManipulate': {
 			'^': [
+				assetHandler.yuiCssOptimize,
+				assetHandler.replaceImageRefToBase64(__dirname + '/public'),
 				function (file, path, index, isLast, callback) {
 					// Notifies the browser to refresh the CSS.
 					// This enables coupled with jquery.reload.js
