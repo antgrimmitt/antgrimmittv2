@@ -10,6 +10,15 @@ var express = require('express');
 var DummyHelper = require('./lib/dummy-helper');
 var SocketServer = require('./lib/socket-server');
 var fs = require('fs');
+
+// preManipulate handler for compiling .sass files to .css
+var sass_compile = function (file, path, index, isLast, callback) {
+	if (path.match(/\.sass$/)) {
+		callback(sass.render(file));
+	} else {
+		callback(file);
+	}
+};
 var assets = assetManager({
 	'js': {
 		'route': /\/static\/js\/[0-9]+\/.*\.js/
@@ -18,7 +27,8 @@ var assets = assetManager({
 		, 'files': [
 			'http://cdn.socket.io/stable/socket.io.js'
 			, 'http://code.jquery.com/jquery-latest.js'
-			, '*'
+			, 'plugins.js'
+			, 'scripts.js'
 			, 'jquery.client.js'
 			, 'jquery.frontend-development.js'
 		]
@@ -47,18 +57,21 @@ var assets = assetManager({
 		, 'path': './public/css/'
 		, 'dataType': 'css'
 		, 'files': [
-			'reset.css'
-			, '*'
+			'boilerplate.css'
+			, 'styles.sass'
+			, 'boilerplate_media.css'
 			, 'frontend-development.css'
 		]
 		, 'preManipulate': {
 			'msie [6-7]': [
-				 assetHandler.fixVendorPrefixes
+				sass_compile
+				, assetHandler.fixVendorPrefixes
 				, assetHandler.fixGradients
 				, assetHandler.stripDataUrlsPrefix
 			]
 			, '^': [
-				 assetHandler.fixVendorPrefixes
+				sass_compile
+				, assetHandler.fixVendorPrefixes
 				, assetHandler.fixGradients
 				, assetHandler.replaceImageRefToBase64(__dirname + '/public')
 			]

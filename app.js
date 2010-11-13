@@ -13,7 +13,7 @@ function NotFound(msg) {
     Error.captureStackTrace(this, arguments.callee);
 }
 
-process.title = 'node-express-boilerplate';
+process.title = 'node-express-html5-boilerplate';
 process.addListener('uncaughtException', function (err, stack) {
 	console.log('Caught exception: ' + err);
 	console.log(err.stack.split('\n'));
@@ -25,15 +25,9 @@ var pub = __dirname + '/public';
 // preManipulate handler for compiling .sass files to .css
 var sass_compile = function (file, path, index, isLast, callback) {
     if (path.match(/\.sass$/)) {
-		fs.readFile(path, 'utf8', function (err, str) {
-			if (err) {
-				next(err);
-			} else {
-				callback(sass.render(str));
-			}
-		});
+	    callback(sass.render(str));
 	} else {
-		callback(file);
+	    callback(file);
 	}
 };
 
