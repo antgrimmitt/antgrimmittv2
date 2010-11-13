@@ -10,6 +10,7 @@ var express = require('express');
 var DummyHelper = require('./lib/dummy-helper');
 var SocketServer = require('./lib/socket-server');
 var fs = require('fs');
+var sass = require('sass');
 
 // preManipulate handler for compiling .sass files to .css
 var sass_compile = function (file, path, index, isLast, callback) {
