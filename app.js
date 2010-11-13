@@ -24,7 +24,7 @@ var pub = __dirname + '/public';
 
 // preManipulate handler for compiling .sass files to .css
 var sass_compile = function (file, path, index, isLast, callback) {
-	if (path.match(/\.sass$/)) {
+    if (path.match(/\.sass$/)) {
 		fs.readFile(path, 'utf8', function (err, str) {
 			if (err) {
 				next(err);
@@ -45,6 +45,8 @@ var assets = assetManager({
 		'path': './public/js/',
 		'dataType': 'js',
 		'files': [
+			'libs/jquery-1.4.2.min.js',
+			'jquery.reload.js',
 			'plugins.js',
 			'script.js'
 		],
@@ -102,6 +104,10 @@ app.configure(function () {
 	app.use(assets);
 });
 
+app.configure('development', function () {
+	app.use(connect.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+
 // Optional since express defaults to CWD/views
 app.set('views', __dirname + '/views');
 
@@ -132,23 +138,23 @@ app.get('/500', function (req, res) {
     throw new Error('This is a 500 Error');
 });
 
+app.get('/reload/', function (req, res) {
+	var reloadCss = lastChangedCss;
+	(function reload() {
+		setTimeout(function () {
+			if (reloadCss < lastChangedCss) {
+				res.send('reload');
+				reloadCss = lastChangedCss;
+			} else {
+				reload();
+			}
+		}, 100);
+	}());
+});
+
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('/*', function (req, res) {
     throw new NotFound();
-});
-
-app.get('/reload/', function (req, res) {
-    var reloadCss = lastChangedCss;
-    (function reload() {
-        setTimeout(function () {
-            if (reloadCss < lastChangedCss) {
-                res.send('reload');
-                reloadCss = lastChangedCss;
-            } else {
-                reload();
-            }
-        }, 100);
-    }());
 });
 
 app.listen(3000);
