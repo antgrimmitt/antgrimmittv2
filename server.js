@@ -25,10 +25,8 @@ var assets = assetManager({
 		, 'path': './public/js/'
 		, 'dataType': 'js'
 		, 'files': [
-			'http://cdn.socket.io/stable/socket.io.js'
-			, 'http://code.jquery.com/jquery-latest.js'
-			, 'plugins.js'
-			, 'scripts.js'
+			'plugins.js'
+			, 'script.js'
 			, 'jquery.client.js'
 			, 'jquery.frontend-development.js'
 		]

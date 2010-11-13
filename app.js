@@ -39,10 +39,10 @@ var assets = assetManager({
 		'path': './public/js/',
 		'dataType': 'js',
 		'files': [
-			'libs/jquery-1.4.2.min.js',
-			'jquery.reload.js',
-			'plugins.js',
-			'script.js'
+			'plugins.js'
+			, 'script.js'
+			, 'jquery.client.js'
+			, 'jquery.frontend-development.js'
 		],
 		'preManipulate': {
 			'^': []
