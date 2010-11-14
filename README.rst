@@ -29,3 +29,4 @@ script::
   npm install
   chmod +x bin/initproject.sh
   ./bin/initproject.sh node app.js
+  node server.js
