@@ -9,7 +9,7 @@
     "connect" : ">=0.2.7",
     "connect-assetmanager" : ">=0.0.12",
     "connect-assetmanager-handlers" : ">=0.0.12",
-    "express" : ">=1.0.0",
+    "express" : ">=1.0.0rc4",
     "socket.io" : ">=0.6.0",
     "sass" : ">=0.5.0",
     "jade" : ">=0.5.5"
